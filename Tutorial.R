@@ -47,18 +47,41 @@ median(dat$Weight, na.rm = TRUE)
 dat_30 <- subset(dat, dat$Day==30)
 median(dat_30$Weight)
 
-weightmean <- function(directory, day)
+weightmedian <- function(directory, day)
 {
   dir_items <- list.files(directory, full.names=TRUE)
   
   coll_dat <- data.frame()
-  for(i in 1:5)
+  for(i in 1:length(dir_items))
     coll_dat <- rbind(coll_dat,read.csv(dir_items[i]))
   str(coll_dat)
   dat_subset <- subset(coll_dat, coll_dat$Day == day)
   median(dat_subset$Weight, na.rm=TRUE)
   
 }
+weightmedian('diet_data', 16)
 
-weightmean('diet_data', 16)
+str(lapply(files_full, read.csv))
 
+wt_mean <- function(directory, type, id)
+{  
+
+  files_full <- list.files(directory, full.names=TRUE)
+  tmp <- vector(mode = "list", length = length(files_full))
+  summary(tmp)
+  
+  for (i in seq_along(files_full)) {
+    tmp[[i]] <- read.csv(files_full[[i]])
+  }
+  
+  output <- do.call(rbind, tmp)
+  str(output)
+  output_subset = subset(output, output$ID %in% id)
+  if(type == 'sulfate') {
+    mean(output_subset$sulfate, na.rm=TRUE)
+  } else if(type == 'nitrate'){
+    mean(output_subset$nitrate, na.rm=TRUE)
+  }
+}
+
+wt_mean('specdata','nitrate', 1:10)

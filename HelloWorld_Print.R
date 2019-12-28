@@ -65,8 +65,3 @@ data.sub2 <- na.omit(data.sub2)
 data.sub2
 max(data.sub2$Ozone)
 
-dataset_url <- "http://s3.amazonaws.com/practice_assignment/diet_data.zip"
-download.file(dataset_url, "diet_data.zip")
-unzip("diet_data.zip", exdir = "diet_data")
-
-list.files("diet_data")
