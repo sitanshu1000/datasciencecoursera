@@ -1,5 +1,5 @@
 
-makeCacheMatrix <- function(x = numeric()) {
+makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
   set <- function(y) {
     x <<- y
@@ -30,6 +30,6 @@ test$get()
 cacheSolve(test)
 test$set(rbind(c(61, 32, 93), c(23, 5, 43), c(21, 89, 83)))
 cacheSolve(test)
-test$set(matrix(6:14, nrow = 3, ncol = 3))
+
 
 
